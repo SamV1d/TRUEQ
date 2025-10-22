@@ -6,8 +6,9 @@ interface Props{
 
 export const Categorias = ({data}: Props) => {
     return(
-        <div>
-            {data.map((categoria: Categoria) => (
+        <div className="relative w-full">
+        <div className="flex flex-nowrap items-center">
+             {data.map((categoria: Categoria) => (
                 <div key={categoria.id}>
                     <CategoriaDropdown 
                     categoria={categoria}
@@ -16,6 +17,8 @@ export const Categorias = ({data}: Props) => {
                     />
                 </div>
               ))}
+        </div>
+           
         </div>
     );
 };
