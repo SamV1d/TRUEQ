@@ -8,6 +8,7 @@ import { set } from "date-fns";
 import { SubcategoriaMenu } from "./subcategoria-menu";
 import { useDropdownPosition } from "./use-dropdown-position";
 import { CustomCategoria } from "../types";
+import Link from "next/link";
 interface Props {
     categoria: CustomCategoria
     isActive?: boolean;
@@ -30,12 +31,18 @@ export const CategoriaDropdown= ({
 
     const onMouseLeave = () => setIsOpen(false);
     const dropdownPosition = getDownropPosition();
-
+    //PUEDE MEJORAR LA VISTA EN CELULARES
+    //const toggleDropdown = () => {
+    //    if(categoria.subcategorias?.docs?.length){
+    //        setIsOpen(!isOpen);
+    //    }
+    //};
     return(
         <div className="relative"
         ref={dropdownRef}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        //onClick={toggleDropdown}
         >
             <div className="relative">
             <Button 
@@ -45,7 +52,13 @@ export const CategoriaDropdown= ({
             isActive && !isNavigationHovered && "bg-white border-primary",
             isOpen && "bg-white border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] -translate-x-[4px] hover:-translate-y-[4px]"
             )}>
-                {categoria.name}
+                <Link
+
+                     href={`/${categoria.slug === "todo" ? "" : categoria.slug}`}
+                     prefetch
+                     >
+                  {categoria.name}
+                </Link>
             </Button>
             {categoria.subcategorias && categoria.subcategorias.length > 0 &&(
             <div
